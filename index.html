@@ -388,7 +388,7 @@ window.addEventListener('load', initGsi);
 async function silentLogin(hint) {
   // Try to get token silently (no prompt) — works if session is fresh
   if (!_tokenClient) return;
-  _tokenClient.requestAccessToken({ prompt: '', login_hint: hint });
+  _tokenClient.requestAccessToken({ prompt: 'consent' });
 }
 
 document.getElementById('btn-login').onclick = () => {
@@ -688,7 +688,7 @@ function renderResult(fileName, headers, rows, issues, fixedRows, sep) {
       a.click(); URL.revokeObjectURL(a.href);
     };
     document.getElementById('btn-gdrive').onclick = () => {
-      if(!_token){ _pendingAction=()=>uploadToDrive(csvFixed,fileName); _tokenClient.requestAccessToken({prompt:''}); return; }
+      if(!_token){ _pendingAction=()=>uploadToDrive(csvFixed,fileName); _tokenClient.requestAccessToken({ prompt: 'consent' }); return; }
       uploadToDrive(csvFixed, fileName);
     };
   }
